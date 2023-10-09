@@ -15,8 +15,8 @@ class LoginPage {
         this.ALL_SECTION_NAMES = '#main-nav li';
         this.PART_HREF = '//ul[@id="main-nav"]/li/a[@href=';
         let linkText;
-        }
-        
+    }
+
 
     loginWithEmail(email, password) {
         cy.contains(this.SIGN_IN_WTH_EMAIL_BUTTON).click();
@@ -27,6 +27,10 @@ class LoginPage {
 
     formatSectionName(section) {
         return section.replace(/\n/g, '').trim();
+    }
+
+    getIframeBody() {
+        return cy.get('#sp_message_container_802595 #sp_message_iframe_802595').its('0.contentDocument').its('body').then(cy.wrap)
     }
 
     availableSectionNames() {
@@ -57,9 +61,7 @@ class LoginPage {
         cy.xpath("//ul[@id='main-nav']/li/a[@aria-current='true']").should('have.attr', 'href', '/')
     }
 
-    getIframeBody(){
-        return cy.get('#sp_message_container_802595 #sp_message_iframe_802595').its('0.contentDocument').its('body').then(cy.wrap)
-    }
+
 
     clickAcceptAllCookie() {
         cy.wait(1500);
@@ -67,7 +69,7 @@ class LoginPage {
             if ($ele.length > 0) {
                 $ele.click();
             }
-        })        
+        })
         cy.wait(1500);
     }
 
@@ -79,20 +81,21 @@ class LoginPage {
         cy.xpath("//ul[@id='main-nav']/li/a[@aria-current='true']").should('have.attr', 'href', '/' + tab)
     }
 
-    selectArticle() {
-        cy.xpath("//ul[@id='main-nav']/li/a[@href='/business']").click()
+    selectArticle(tab) {
+        // cy.xpath("//ul[@id='main-nav']/li/a[@href='/travel']").click()
+        this.clickAnotherTab(tab);
         cy.get("div[data-type='hero-horizontal'] span.sdc-site-tile__headline-text").then(($div) => {
             this.linkText = $div.text();
-        });        
+        });
         cy.xpath("//div[@data-type='hero-horizontal']//span[@class='sdc-site-tile__headline-text']/parent::a[@href]").click()
     }
 
     verifyArticleTitle() {
-            cy.log('Link TEXT : ' + this.linkText) 
-            cy.xpath('//h1/span').invoke('text').then(($heading) => {
-                cy.log('Article Heading: ' + $heading)
-                expect($heading.replace(/\*/g, '')).contains(this.linkText)
-            })
+        cy.log('Link TEXT : ' + this.linkText)
+        cy.xpath('//h1/span').invoke('text').then(($heading) => {
+            cy.log('Article Heading: ' + $heading)
+            expect($heading.replace(/\*/g, '')).contains(this.linkText)
+        })
     }
 }
 

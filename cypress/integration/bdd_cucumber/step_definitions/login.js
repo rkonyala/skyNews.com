@@ -31,8 +31,8 @@ Then("The focus should change on to {string}", (tab) => {
     LoginPage.verifyFocus(tab);
 })
 
-When("I select a news article from any page", () => {
-    LoginPage.selectArticle();
+When("I select a news article from {string} page", (tab) => {
+    LoginPage.selectArticle(tab);
 })
 
 Then("I should ensure the title text appears in the article once the page loads", () => {

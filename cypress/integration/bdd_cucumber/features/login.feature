@@ -24,5 +24,5 @@ Feature: SkyNews.com homepage
 
 
     Scenario: D. Select a story from the homepage. Verify that a word of your choice in the title of the article you have just selected appears once the title of the page loads.
-        When I select a news article from any page
+        When I select a news article from "travel" page
         Then I should ensure the title text appears in the article once the page loads

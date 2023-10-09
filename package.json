@@ -1,0 +1,33 @@
+{
+  "name": "",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "script": "cypress run --browser chrome",
+    "test": "npm run script",
+    "chromeTest": "npx cypress run --env tags='@login' --browser chrome --headed"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "cypress": "^13.3.0",
+    "cypress-file-upload": "^5.0.8",
+    "multiple-cucumber-html-reporter": "^3.5.0"
+  },
+  "dependencies": {
+    "@badeball/cypress-cucumber-preprocessor": "^18.0.6",
+    "@cypress/browserify-preprocessor": "^3.0.2",
+    "cypress-iframe": "^1.0.1",
+    "cypress-xpath": "^2.0.1",
+    "i": "^0.3.7",
+    "moment": "^2.29.4",
+    "npm": "^10.2.0"
+  },
+  "cypress-cucumber-preprocessor": {
+    "nonGlobalStepDefinitions": false,
+    "stepDefinitions": "cypress/integration/bdd_cucumber/step_definitions/*.js",
+    "filterSpecs": true,
+    "omitFiltered": true
+  }
+}
